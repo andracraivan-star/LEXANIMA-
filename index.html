@@ -102,45 +102,98 @@
 </div>
 
 <script>
-  const T = {
-    it: {
-      subtitle: "Ex litteris forma animae",
-      description: "Sistema simbolico contemporaneo basato sull’alfabeto romano. Interpreta il nome come configurazione identitaria ed evolutiva.",
-      placeholder: "Inserisci il nome",
-      button: "ANALIZZA",
-      note: "La Direzione può essere latente, attiva o integrata. Il sistema offre la mappa."
-    },
-    ro: {
-      subtitle: "Ex litteris forma animae",
-      description: "Sistem simbolic contemporan bazat pe alfabetul roman. Interpretează numele ca o configurație identitară și evolutivă.",
-      placeholder: "Introdu numele",
-      button: "ANALIZEAZĂ",
-      note: "Direcția poate fi latentă, activă sau integrată. Sistemul oferă harta."
-    },
-    en: {
-      subtitle: "Ex litteris forma animae",
-      description: "A contemporary symbolic system based on the Roman alphabet. It interprets the name as an identity and evolutionary configuration.",
-      placeholder: "Enter the name",
-      button: "ANALYZE",
-      note: "Direction can be latent, active, or integrated. The system offers the map."
-    }
-  };
 
-  function setLang(lang){
-    document.documentElement.lang = lang;
-    document.getElementById("subtitle").textContent = T[lang].subtitle;
-    document.getElementById("description").textContent = T[lang].description;
-    document.getElementById("nameInput").placeholder = T[lang].placeholder;
-    document.getElementById("analyzeBtn").textContent = T[lang].button;
-    document.getElementById("note").textContent = T[lang].note;
+const LETTERS = {
+A:{a:"Origine",e:"Fuoco"},
+B:{a:"Radicamento",e:"Terra"},
+C:{a:"Movimento",e:"Aria"},
+D:{a:"Direzione",e:"Fuoco"},
+E:{a:"Espansione",e:"Aria"},
+F:{a:"Struttura",e:"Terra"},
+G:{a:"Generazione",e:"Acqua"},
+H:{a:"Connessione",e:"Aria"},
+I:{a:"Identità",e:"Fuoco"},
+J:{a:"Slancio",e:"Fuoco"},
+K:{a:"Forza",e:"Terra"},
+L:{a:"Legame",e:"Acqua"},
+M:{a:"Nutrimento",e:"Acqua"},
+N:{a:"Transizione",e:"Acqua"},
+O:{a:"Totalità",e:"Acqua"},
+P:{a:"Potenziale",e:"Terra"},
+Q:{a:"Ricerca",e:"Aria"},
+R:{a:"Risonanza",e:"Aria"},
+S:{a:"Trasformazione",e:"Acqua"},
+T:{a:"Stabilità",e:"Terra"},
+U:{a:"Profondità",e:"Acqua"},
+V:{a:"Volontà",e:"Fuoco"},
+W:{a:"Dualità",e:"Aria"},
+X:{a:"Crocevia",e:"Aria"},
+Y:{a:"Scelta",e:"Aria"},
+Z:{a:"Compimento",e:"Terra"}
+};
 
-    ["it","ro","en"].forEach(l=>{
-      document.getElementById("btn-"+l).classList.toggle("active", l===lang);
-    });
-  }
+const ELEMENT_TEXT = {
+it:{
+Fuoco:"energia di impulso e iniziativa",
+Terra:"energia di struttura e costruzione",
+Aria:"energia mentale e relazionale",
+Acqua:"energia emotiva e trasformativa",
+direction:(first,last)=>`Potrebbe emergere una dinamica tra ${first} e ${last}. Una possibile direzione di integrazione è armonizzare questi due poli nella tua esperienza.`
+},
+ro:{
+Fuoco:"energie de inițiativă și impuls",
+Terra:"energie de structură și construcție",
+Aria:"energie mentală și relațională",
+Acqua:"energie emoțională și transformatoare",
+direction:(first,last)=>`Poate apărea o dinamică între ${first} și ${last}. O posibilă direcție de integrare este armonizarea acestor două energii.`
+},
+en:{
+Fuoco:"energy of initiative and drive",
+Terra:"energy of structure and grounding",
+Aria:"mental and relational energy",
+Acqua:"emotional and transformative energy",
+direction:(first,last)=>`A dynamic may arise between ${first} and ${last}. A possible direction of integration is to harmonize these two forces.`
+}
+};
 
-  setLang("it");
+function analyzeName(){
+const name = document.getElementById("nameInput").value.toUpperCase().replace(/[^A-Z]/g,"");
+if(!name) return;
+
+let elementsCount = {Fuoco:0,Terra:0,Aria:0,Acqua:0};
+let archetypes = [];
+
+for(let letter of name){
+if(LETTERS[letter]){
+elementsCount[LETTERS[letter].e]++;
+archetypes.push(LETTERS[letter].a);
+}
+}
+
+const first = LETTERS[name[0]]?.a || "";
+const last = LETTERS[name[name.length-1]]?.a || "";
+
+let dominantElement = Object.keys(elementsCount).reduce((a,b)=>
+elementsCount[a]>elementsCount[b]?a:b
+);
+
+const lang = document.documentElement.lang || "it";
+
+let result = `
+<h2>SCHEDA ARCHETIPICA – ${name}</h2>
+<p><strong>Archetipi:</strong> ${archetypes.join(" – ")}</p>
+<p><strong>Energia dominante:</strong> ${ELEMENT_TEXT[lang][dominantElement]}</p>
+<p><strong>Direzione:</strong> ${ELEMENT_TEXT[lang].direction(first,last)}</p>
+`;
+
+document.getElementById("note").innerHTML = result;
+}
+
+document.getElementById("analyzeBtn").addEventListener("click", analyzeName);
+
 </script>
+
+
 
 </body>
 </html>
