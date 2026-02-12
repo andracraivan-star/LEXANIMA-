@@ -8,92 +8,139 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #f4f1e8;
-  font-family: 'Cormorant Garamond', serif;
-  color: #1a1a1a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-}
-
-.container {
-  max-width: 500px;
-  padding: 40px;
-}
-
-h1 {
-  font-family: 'Cinzel', serif;
-  letter-spacing: 6px;
-  font-size: 42px;
-  margin-bottom: 10px;
-}
-
-.subtitle {
-  font-size: 18px;
-  margin-bottom: 30px;
-  opacity: 0.8;
-}
-
-.line {
-  width: 80px;
-  height: 1px;
-  background-color: #1a1a1a;
-  margin: 20px auto 30px auto;
-}
-
-.description {
-  font-size: 16px;
-  margin-bottom: 40px;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #1a1a1a;
-  background-color: transparent;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-button {
-  background-color: #7a1c1c;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  font-size: 14px;
-  letter-spacing: 2px;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
-}
+  body{
+    margin:0;
+    padding:0;
+    background-color:#f4f1e8;
+    font-family:'Cormorant Garamond',serif;
+    color:#1a1a1a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+  }
+  .container{max-width:520px;padding:40px;}
+  h1{
+    font-family:'Cinzel',serif;
+    letter-spacing:6px;
+    font-size:42px;
+    margin:0 0 10px 0;
+  }
+  .line{
+    width:80px;height:1px;background-color:#1a1a1a;
+    margin:16px auto 22px auto;
+  }
+  .subtitle{font-size:18px;margin-bottom:18px;opacity:.82;}
+  .description{font-size:16px;margin:0 auto 26px auto;line-height:1.35;}
+  .langbar{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:0 0 26px 0;
+  }
+  .langbtn{
+    background:transparent;
+    border:1px solid #1a1a1a;
+    padding:6px 10px;
+    font-size:13px;
+    letter-spacing:1px;
+    cursor:pointer;
+  }
+  .langbtn.active{
+    background-color:#1a1a1a;
+    color:#f4f1e8;
+  }
+  input{
+    width:100%;
+    padding:12px;
+    font-size:16px;
+    border:1px solid #1a1a1a;
+    background-color:transparent;
+    margin-bottom:18px;
+    text-align:center;
+  }
+  button{
+    background-color:#7a1c1c;
+    color:#fff;
+    border:none;
+    padding:12px 30px;
+    font-size:14px;
+    letter-spacing:2px;
+    cursor:pointer;
+  }
+  button:hover{opacity:.92;}
+  .note{
+    font-size:14px;
+    opacity:.75;
+    margin-top:18px;
+    line-height:1.25;
+  }
 </style>
 </head>
 
 <body>
 <div class="container">
 
-<h1>LEXANIMA</h1>
-<div class="line"></div>
+  <h1>LEXANIMA</h1>
+  <div class="line"></div>
 
-<div class="subtitle">Ex litteris forma animae</div>
+  <div id="subtitle" class="subtitle"></div>
+  <div id="description" class="description"></div>
 
-<div class="description">
-Sistema simbolico contemporaneo basato sull’alfabeto romano.
-Interpreta il nome come configurazione identitaria ed evolutiva.
+  <div class="langbar" aria-label="Language selector">
+    <button class="langbtn active" id="btn-it" type="button" onclick="setLang('it')">IT</button>
+    <button class="langbtn" id="btn-ro" type="button" onclick="setLang('ro')">RO</button>
+    <button class="langbtn" id="btn-en" type="button" onclick="setLang('en')">EN</button>
+  </div>
+
+  <input id="nameInput" type="text" autocomplete="name" placeholder="">
+  <button id="analyzeBtn" type="button">ANALIZZA</button>
+
+  <div id="note" class="note"></div>
+
 </div>
 
-<input type="text" placeholder="Inserisci il nome">
+<script>
+  const T = {
+    it: {
+      subtitle: "Ex litteris forma animae",
+      description: "Sistema simbolico contemporaneo basato sull’alfabeto romano. Interpreta il nome come configurazione identitaria ed evolutiva.",
+      placeholder: "Inserisci il nome",
+      button: "ANALIZZA",
+      note: "La Direzione può essere latente, attiva o integrata. Il sistema offre la mappa."
+    },
+    ro: {
+      subtitle: "Ex litteris forma animae",
+      description: "Sistem simbolic contemporan bazat pe alfabetul roman. Interpretează numele ca o configurație identitară și evolutivă.",
+      placeholder: "Introdu numele",
+      button: "ANALIZEAZĂ",
+      note: "Direcția poate fi latentă, activă sau integrată. Sistemul oferă harta."
+    },
+    en: {
+      subtitle: "Ex litteris forma animae",
+      description: "A contemporary symbolic system based on the Roman alphabet. It interprets the name as an identity and evolutionary configuration.",
+      placeholder: "Enter the name",
+      button: "ANALYZE",
+      note: "Direction can be latent, active, or integrated. The system offers the map."
+    }
+  };
 
-<button>ANALIZZA</button>
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.getElementById("subtitle").textContent = T[lang].subtitle;
+    document.getElementById("description").textContent = T[lang].description;
+    document.getElementById("nameInput").placeholder = T[lang].placeholder;
+    document.getElementById("analyzeBtn").textContent = T[lang].button;
+    document.getElementById("note").textContent = T[lang].note;
 
-</div>
+    ["it","ro","en"].forEach(l=>{
+      document.getElementById("btn-"+l).classList.toggle("active", l===lang);
+    });
+  }
+
+  setLang("it");
+</script>
+
 </body>
 </html>
