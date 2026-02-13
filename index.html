@@ -223,7 +223,38 @@ const EX_LABELS = {
 };
 
 function gloss(ar){
-  return ARCH_GLOSS[ar]?.[currentLang] || ar;
+  if(currentLang === "it") return ar;
+
+  const names = {
+    Origine: { ro:"Origine", en:"Origin" },
+    Radicamento:{ ro:"Înrădăcinare", en:"Grounding" },
+    Movimento:{ ro:"Mișcare", en:"Movement" },
+    Direzione:{ ro:"Direcție", en:"Direction" },
+    Espansione:{ ro:"Expansiune", en:"Expansion" },
+    Struttura:{ ro:"Structură", en:"Structure" },
+    Generazione:{ ro:"Generare", en:"Generation" },
+    Connessione:{ ro:"Conexiune", en:"Connection" },
+    Identità:{ ro:"Identitate", en:"Identity" },
+    Slancio:{ ro:"Impuls", en:"Drive" },
+    Forza:{ ro:"Forță", en:"Strength" },
+    Legame:{ ro:"Legătură", en:"Bond" },
+    Nutrimento:{ ro:"Hrănire", en:"Nourishment" },
+    Transizione:{ ro:"Tranziție", en:"Transition" },
+    Totalità:{ ro:"Totalitate", en:"Totality" },
+    Potenziale:{ ro:"Potențial", en:"Potential" },
+    Ricerca:{ ro:"Cercetare", en:"Inquiry" },
+    Risonanza:{ ro:"Rezonanță", en:"Resonance" },
+    Trasformazione:{ ro:"Transformare", en:"Transformation" },
+    Stabilità:{ ro:"Stabilitate", en:"Stability" },
+    Profondità:{ ro:"Profunzime", en:"Depth" },
+    Volontà:{ ro:"Voință", en:"Will" },
+    Dualità:{ ro:"Dualitate", en:"Duality" },
+    Crocevia:{ ro:"Răscruce", en:"Crossroads" },
+    Scelta:{ ro:"Alegere", en:"Choice" },
+    Compimento:{ ro:"Împlinire", en:"Completion" }
+  };
+
+  return names[ar]?.[currentLang] || ar;
 }
 
 function directionText(first,last){
