@@ -183,7 +183,92 @@
   };
 
   let currentLang = "it";
+const ARCH_GLOSS = {
+  Origine:{it:"inizio e auto-generazione",ro:"început și auto-generare",en:"beginnings and self-generation"},
+  Radicamento:{it:"stabilità e concretezza",ro:"stabilitate și concret",en:"stability and concreteness"},
+  Movimento:{it:"cambiamento e flusso",ro:"schimbare și flux",en:"change and flow"},
+  Direzione:{it:"scelta e orientamento",ro:"alegere și orientare",en:"choice and direction"},
+  Espansione:{it:"apertura e possibilità",ro:"deschidere și posibilități",en:"openness and possibilities"},
+  Struttura:{it:"ordine e disciplina",ro:"ordine și disciplină",en:"order and discipline"},
+  Generazione:{it:"creazione e crescita",ro:"creare și creștere",en:"creation and growth"},
+  Connessione:{it:"legami e rete",ro:"legături și rețea",en:"links and network"},
+  Identità:{it:"io e presenza",ro:"eu și prezență",en:"self and presence"},
+  Slancio:{it:"spinta e coraggio",ro:"impuls și curaj",en:"drive and courage"},
+  Forza:{it:"resistenza e centratura",ro:"rezistență și centrare",en:"strength and grounding"},
+  Legame:{it:"vicinanza e fiducia",ro:"apropiere și încredere",en:"closeness and trust"},
+  Nutrimento:{it:"cura e continuità",ro:"grijă și continuitate",en:"care and continuity"},
+  Transizione:{it:"passaggio e adattamento",ro:"tranziție și adaptare",en:"transition and adaptation"},
+  Totalità:{it:"integrazione e completezza",ro:"integrare și întreg",en:"integration and wholeness"},
+  Potenziale:{it:"risorsa e maturazione",ro:"resursă și maturizare",en:"resource and maturation"},
+  Ricerca:{it:"domande e chiarimento",ro:"întrebări și clarificare",en:"inquiry and clarity"},
+  Risonanza:{it:"significato e comunicazione",ro:"sens și comunicare",en:"meaning and communication"},
+  Trasformazione:{it:"profondità e muta",ro:"profunzime și schimbare",en:"depth and change"},
+  Stabilità:{it:"costanza e basi",ro:"constanță și baze",en:"consistency and foundations"},
+  Profondità:{it:"interiorità e verità",ro:"interior și adevăr",en:"inner depth and truth"},
+  Volontà:{it:"decisione e azione",ro:"decizie și acțiune",en:"decision and action"},
+  Dualità:{it:"polarità e scelta",ro:"polaritate și alegere",en:"polarity and choice"},
+  Crocevia:{it:"svolta e alternative",ro:"răscruce și alternative",en:"turning point and options"},
+  Scelta:{it:"priorità e tagli",ro:"priorități și decizii",en:"priorities and decisions"},
+  Compimento:{it:"chiusura e risultato",ro:"încheiere și rezultat",en:"closure and outcome"}
+};
 
+const EX_LABELS = {
+  it:{title:"Esempi pratici",w:"Lavoro",r:"Relazioni",s:"Crescita personale"},
+  ro:{title:"Exemple practice",w:"Muncă",r:"Relații",s:"Creștere personală"},
+  en:{title:"Practical examples",w:"Work",r:"Relationships",s:"Personal growth"}
+};
+
+function gloss(ar){
+  return ARCH_GLOSS[ar]?.[currentLang] || ar;
+}
+
+function directionText(first,last){
+  if(first === last){
+    if(currentLang==="it") return `Direzione: lo stesso archetipo apre e chiude il nome (${first}). Il tema tende a essere ciclico: ritorni all’essenza, riparti, rigeneri.`;
+    if(currentLang==="ro") return `Direcție: același arhetip deschide și închide numele (${first}). Tema poate fi ciclic: revii la esență, reîncepi, te regenerezi.`;
+    return `Direction: the same archetype opens and closes the name (${first}). The theme can be cyclical: returning to the essence, restarting, regenerating.`;
+  }
+  if(currentLang==="it") return `Direzione: potrebbe emergere una dinamica tra ${first} (${gloss(first)}) e ${last} (${gloss(last)}). Una possibile integrazione è far collaborare inizio e sostegno.`;
+  if(currentLang==="ro") return `Direcție: poate apărea o dinamică între ${first} (${gloss(first)}) și ${last} (${gloss(last)}). O posibilă integrare este să le lași să colaboreze.`;
+  return `Direction: a dynamic may arise between ${first} (${gloss(first)}) and ${last} (${gloss(last)}). A possible integration is to let them cooperate.`;
+}
+
+function examplesList(first,last){
+  const L = EX_LABELS[currentLang];
+  if(first === last){
+    if(currentLang==="it") return [
+      `${L.w}: iniziare e ripartire più volte finché trovi la forma giusta, poi stabilizzare.`,
+      `${L.r}: bisogno di autenticità; rientrare in sé prima di aprirsi agli altri.`,
+      `${L.s}: pratica di “ritorno al centro”: chiudere cicli e rinascere più lucida.`
+    ];
+    if(currentLang==="ro") return [
+      `${L.w}: să începi și să reîncepi până găsești forma potrivită, apoi să stabilizezi.`,
+      `${L.r}: nevoia de autenticitate; să revii la tine înainte să te deschizi.`,
+      `${L.s}: practică de “întoarcere la centru”: închei cicluri și renaști mai clar.`
+    ];
+    return [
+      `${L.w}: starting and restarting until the right form appears, then stabilizing.`,
+      `${L.r}: a need for authenticity; returning to yourself before opening to others.`,
+      `${L.s}: a “back to center” practice: closing cycles and coming back clearer.`
+    ];
+  }
+
+  if(currentLang==="it") return [
+    `${L.w}: avviare ( ${first} ) e poi sostenere nel tempo ( ${last} ): meno sprint, più continuità.`,
+    `${L.r}: autonomia e iniziativa ( ${first} ) senza perdere cura e presenza ( ${last} ).`,
+    `${L.s}: trasformare l’impulso iniziale ( ${first} ) in un gesto che nutre e consolida ( ${last} ).`
+  ];
+  if(currentLang==="ro") return [
+    `${L.w}: să pornești ( ${first} ) și apoi să susții în timp ( ${last} ): mai puțin sprint, mai multă continuitate.`,
+    `${L.r}: autonomie și inițiativă ( ${first} ) fără să pierzi grijă și prezență ( ${last} ).`,
+    `${L.s}: să transformi impulsul inițial ( ${first} ) într-un gest care hrănește și consolidează ( ${last} ).`
+  ];
+  return [
+    `${L.w}: initiating ( ${first} ) and then sustaining over time ( ${last} ): less sprint, more continuity.`,
+    `${L.r}: autonomy and initiative ( ${first} ) without losing care and presence ( ${last} ).`,
+    `${L.s}: turning the initial impulse ( ${first} ) into something that nourishes and consolidates ( ${last} ).`
+  ];
+}
   function setLang(lang){
     currentLang = lang;
     document.documentElement.lang = lang;
