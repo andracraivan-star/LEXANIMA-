@@ -344,7 +344,8 @@ function examplesList(first,last){
 const firstA = LETTERS[name[0]]?.a || "";
 const lastA  = LETTERS[name[name.length-1]]?.a || "";
 const directionMsg = directionText(firstA, lastA);
-
+const exTitle = EX_LABELS[currentLang].title;
+const exItems = examplesList(firstA, lastA);
     const dominantKey = Object.keys(elementsCount).reduce((best,k)=>{
       return elementsCount[k] > elementsCount[best] ? k : best;
     }, "Fuoco");
@@ -363,7 +364,12 @@ const directionMsg = directionText(firstA, lastA);
       <strong>${ELEMENT_PHRASE[currentLang].energy(elLabel)}</strong>
     </div>
     <div style="margin-top:6px">${directionMsg}</div>
-  </div>`;
+  </div>`;<div style="margin-top:14px; font-weight:600;">${exTitle}</div>
+<ul style="margin:8px auto 0 auto; padding-left:18px; text-align:left; max-width:460px;">
+  <li style="margin:6px 0;">${exItems[0]}</li>
+  <li style="margin:6px 0;">${exItems[1]}</li>
+  <li style="margin:6px 0;">${exItems[2]}</li>
+</ul>
   }
   document.getElementById("analyzeBtn").addEventListener("click", analyzeName);
 
