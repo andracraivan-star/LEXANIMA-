@@ -308,7 +308,14 @@ function examplesList(first,last){
     const firstA = LETTERS[name[0]]?.a || "";
     const lastA  = LETTERS[name[name.length-1]]?.a || "";
 let directionText = "";
-
+const directionText =
+  (firstA && lastA && firstA === lastA)
+    ? (currentLang === "it"
+        ? `Direzione: l’archetipo iniziale e finale coincidono (${firstA}). Qui non c’è “integrazione di poli”, ma approfondimento. La chiave è portare ${firstA} da istinto a scelta consapevole: ripetizione, disciplina, incarnazione.`
+        : currentLang === "ro"
+          ? `Direcție: arhetipul inițial și final coincid (${firstA}). Aici nu este „integrarea a doi poli”, ci aprofundare. Cheia este să duci ${firstA} de la instinct la alegere conștientă: repetiție, disciplină, întrupare.`
+          : `Direction: the first and last archetype match (${firstA}). This is not “integrating two poles” but deepening. The key is to move ${firstA} from instinct to conscious choice: repetition, discipline, embodiment.`)
+    : ELEMENT_PHRASE[currentLang].direction(firstA, lastA);
 if(firstA === lastA){
   directionText = `Direzione: l’archetipo di ${firstA} apre e chiude il nome. 
   Questo può indicare un tema centrale legato a ${firstA.toLowerCase()}.
