@@ -307,7 +307,15 @@ function examplesList(first,last){
 
     const firstA = LETTERS[name[0]]?.a || "";
     const lastA  = LETTERS[name[name.length-1]]?.a || "";
+let directionText = "";
 
+if(firstA === lastA){
+  directionText = `Direzione: l’archetipo di ${firstA} apre e chiude il nome. 
+  Questo può indicare un tema centrale legato a ${firstA.toLowerCase()}.
+  La possibile direzione è incarnare pienamente questa energia, evitando ripetizione inconscia o dispersione.`;
+} else {
+  directionText = ELEMENT_PHRASE[currentLang].direction(firstA,lastA);
+}
     const dominantKey = Object.keys(elementsCount).reduce((best,k)=>{
       return elementsCount[k] > elementsCount[best] ? k : best;
     }, "Fuoco");
