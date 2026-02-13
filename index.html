@@ -352,29 +352,7 @@ const exItems = examplesList(firstA, lastA);
 
     const elLabel = ELEMENT_PHRASE[currentLang][dominantKey];
 
-    document.getElementById("result").innerHTML =
-  `<div style="margin-top:14px">
-    <div style="font-weight:600; letter-spacing:1px">
-      ${RESULT_UI[currentLang].sheet} – ${name}
-    </div>
 
-    <div style="margin-top:10px">
-      <strong>${RESULT_UI[currentLang].archetypes}:</strong> ${archetypes.join(" – ")}
-    </div>
-
-    <div style="margin-top:6px">
-      <strong>${ELEMENT_PHRASE[currentLang].energy(elLabel)}</strong>
-    </div>
-
-    <div style="margin-top:6px">${directionMsg}</div>
-
-    <div style="margin-top:14px; font-weight:600;">${exTitle}</div>
-    <ul style="margin:8px auto 0 auto; padding-left:18px; text-align:left; max-width:460px;">
-      <li style="margin:6px 0;">${exItems[0]}</li>
-      <li style="margin:6px 0;">${exItems[1]}</li>
-      <li style="margin:6px 0;">${exItems[2]}</li>
-    </ul>
-  </div>`;
   document.getElementById("analyzeBtn").addEventListener("click", analyzeName);
 
   // Espone setLang per gli onclick dei bottoni lingua
