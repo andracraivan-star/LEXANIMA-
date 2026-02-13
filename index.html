@@ -322,9 +322,15 @@ const directionMsg = directionText(firstA, lastA);
 
     document.getElementById("result").innerHTML =
   `<div style="margin-top:14px">
-    <div style="font-weight:600; letter-spacing:1px">SCHEDA ARCHETIPICA – ${name}</div>
-    <div style="margin-top:10px"><strong>Archetipi:</strong> ${archetypes.join(" – ")}</div>
-    <div style="margin-top:6px"><strong>${ELEMENT_PHRASE[currentLang].energy(elLabel)}</strong></div>
+    <div style="font-weight:600; letter-spacing:1px">
+      ${RESULT_UI[currentLang].sheet} – ${name}
+    </div>
+    <div style="margin-top:10px">
+      <strong>${RESULT_UI[currentLang].archetypes}:</strong> ${archetypes.join(" – ")}
+    </div>
+    <div style="margin-top:6px">
+      <strong>${ELEMENT_PHRASE[currentLang].energy(elLabel)}</strong>
+    </div>
     <div style="margin-top:6px">${directionMsg}</div>
   </div>`;
   }
