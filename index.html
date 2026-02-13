@@ -305,10 +305,10 @@ function examplesList(first,last){
       archetypes.push(info.a);
     }
 
-    const firstA = LETTERS[name[0]]?.a || "";
-    const lastA  = LETTERS[name[name.length-1]]?.a || "";
-let directionText = "";
-
+    
+const firstA = LETTERS[name[0]]?.a || "";
+const lastA  = LETTERS[name[name.length-1]]?.a || "";
+const directionMsg = directionText(firstA, lastA);
 
     const dominantKey = Object.keys(elementsCount).reduce((best,k)=>{
       return elementsCount[k] > elementsCount[best] ? k : best;
